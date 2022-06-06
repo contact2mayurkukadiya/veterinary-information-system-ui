@@ -1,0 +1,60 @@
+export const ENDPOINTS = Object.freeze({
+  FARM_TYPE: {
+    CREATE: '/farmtypes',
+    RETRIEVE_ALL: '/farmtypes',
+    RETRIEVE_ONE: '/farmtypes/{id}',
+    MODIFY: '/farmtypes/{id}',
+    DELETE: '/farmtypes/{id}',
+    DEACTIVATE: '/farmtypes/{id}/deactivate',
+  },
+  UNGULATE: {
+    CREATE: '/ungulates',
+    RETRIEVE_ALL: '/ungulates',
+    RETRIEVE_ONE: '/ungulates/{id}',
+    MODIFY: '/ungulates/{id}',
+    DELETE: '/ungulates/{id}',
+    DEACTIVATE: '/ungulates/{id}/deactivate',
+    UPLOAD_IMAGES: '/ungulates/images',
+    DOWNLOAD_IMAGES: '/ungulates/images/download',
+    CONFIRMATION_DOWNLOAD: '/ungulates/confirmation/download',
+  },
+  UNGULATE_RACE: {
+    CREATE: '/ungulateraces',
+    RETRIEVE_ALL: '/ungulateraces',
+    RETRIEVE_ONE: '/ungulateraces/{id}',
+    MODIFY: '/ungulateraces/{id}',
+    DELETE: '/ungulateraces/{id}',
+    DEACTIVATE: '/ungulateraces/{id}/deactivate',
+  },
+  UNGULATE_PURPOSE: {
+    CREATE: '/ungulatepurposes',
+    RETRIEVE_ALL: '/ungulatepurposes',
+    RETRIEVE_ONE: '/ungulatepurposes/{id}',
+    MODIFY: '/ungulatepurposes/{id}',
+    DELETE: '/ungulatepurposes/{id}',
+    DEACTIVATE: '/ungulatepurposes/{id}/deactivate',
+  },
+  UNGULATE_HOLDER: {
+    CREATE: '/ungulateholders',
+    RETRIEVE_ALL: '/ungulateholders',
+    RETRIEVE_ONE: '/ungulateholders/{id}',
+    MODIFY: '/ungulateholders/{id}',
+    DELETE: '/ungulateholders/{id}',
+    DEACTIVATE: '/ungulateholders/{id}/deactivate',
+  },
+  UNGULATE_OWNER: {
+    CREATE_INDIVIDUAL: '/ungulateowners',
+    CREATE_LEGAL_ENTITY: '/ungulateowners/{companyIdentificationNumber}',
+    RETRIEVE_ALL: '/ungulateowners',
+    RETRIEVE_ONE: '/ungulateowners/{id}',
+    MODIFY: '/ungulateowners/{id}',
+    DELETE: '/ungulateowners/{id}',
+    DEACTIVATE: '/ungulateowners/{id}/deactivate',
+  },
+  EXTRA_SERVICES: {
+    GETCOUNTRIES: '/externalservices/countries',
+    GETDISTRICTS: '/externalservices/districts',
+    GETMUNICIPALITIES: '/externalservices/districts/{id}',
+    GETPLACES: '/externalservices/municipality/{id}'
+  }
+});

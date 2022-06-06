@@ -1,0 +1,188 @@
+<div class="animated fadeIn">
+  <form action="" method="post">
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header">
+            <h3 class="my-0">Профил држалаца копитара</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="ungulateHolderForm" (submit)="createOrUpdateData()">
+              <div class="form-group">
+                <label for="hid">
+                  <span class="text-danger"><strong>*</strong></span> ХИД:
+                </label>
+                <input type="text" formControlName="hid" id="hid" name="hid" class="form-control" placeholder="ХИД"
+                       maxlength="13"
+                       [ngClass]="{ 'is-invalid': ungulateHolderForm.get('hid').dirty && ungulateHolderForm.get('hid')?.errors, 'is-valid': ungulateHolderForm.get('hid').touched && !ungulateHolderForm.get('hid')?.errors }">
+                <div *ngIf="ungulateHolderForm.get('hid').dirty && ungulateHolderForm.get('hid')?.errors"
+                     class="invalid-feedback">
+                  <div *ngIf="ungulateHolderForm.get('hid')?.errors?.required">
+                    Молимо вас попуните означено поље!
+                  </div>
+                  <div *ngIf="ungulateHolderForm.get('hid')?.errors?.maxlength">
+                    Прекорачена је дужина од 13 карактера!
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">
+                  <span class="text-danger"><strong>*</strong></span> Име:
+                </label>
+                <input type="text" formControlName="name" id="name" name="name" class="form-control" placeholder="Име"
+                       maxlength="50"
+                       [ngClass]="{ 'is-invalid': ungulateHolderForm.get('name').dirty && ungulateHolderForm.get('name')?.errors, 'is-valid': ungulateHolderForm.get('name').touched && !ungulateHolderForm.get('name')?.errors }">
+                <div *ngIf="ungulateHolderForm.get('name').dirty && ungulateHolderForm.get('name')?.errors"
+                     class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateHolderForm.get('name')?.errors?.required">Name is required</div> -->
+                  <div *ngIf="ungulateHolderForm.get('name')?.errors?.required">Име је обавезно</div>
+                  <!-- <div *ngIf="ungulateHolderForm.get('name')?.errors?.maxlength">Max length of name is 50 character</div> -->
+                  <div *ngIf="ungulateHolderForm.get('name')?.errors?.maxlength">Максимална дужина имена је 50 знакова
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="surname">
+                  <span class="text-danger"><strong>*</strong></span> Презиме:
+                </label>
+                <input type="text" formControlName="surname" id="surname" name="surname" class="form-control"
+                       placeholder="Презиме" maxlength="50"
+                       [ngClass]="{ 'is-invalid': ungulateHolderForm.get('surname').dirty && ungulateHolderForm.get('surname')?.errors, 'is-valid': ungulateHolderForm.get('surname').touched && !ungulateHolderForm.get('surname')?.errors }">
+                <div *ngIf="ungulateHolderForm.get('surname').dirty && ungulateHolderForm.get('surname')?.errors"
+                     class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateHolderForm.get('surname')?.errors?.required">Surname is required</div> -->
+                  <div *ngIf="ungulateHolderForm.get('surname')?.errors?.required">Презиме је обавезно</div>
+                  <!-- <div *ngIf="ungulateHolderForm.get('surname')?.errors?.maxlength">Max length of surname is 50 character</div> -->
+                  <div *ngIf="ungulateHolderForm.get('surname')?.errors?.maxlength">Максимална дужина презимена је 50
+                    карактера
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="unique-identification-number">
+                  <span class="text-danger"><strong>*</strong></span> ЈМБГ:
+                </label>
+                <input type="text" formControlName="identificationNumber" id="unique-identification-number"
+                       name="unique-identification-number" class="form-control" placeholder="ЈМБГ" maxlength="13"
+                       [ngClass]="{ 'is-invalid': ungulateHolderForm.get('identificationNumber').dirty && ungulateHolderForm.get('identificationNumber')?.errors, 'is-valid': ungulateHolderForm.get('identificationNumber').touched && !ungulateHolderForm.get('identificationNumber')?.errors }">
+                <div
+                  *ngIf="ungulateHolderForm.get('identificationNumber').dirty && ungulateHolderForm.get('identificationNumber')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateHolderForm.get('identificationNumber')?.errors?.required">Identification number is required</div> -->
+                  <div *ngIf="ungulateHolderForm.get('identificationNumber')?.errors?.required">Идентификациони број је
+                    обавезан
+                  </div>
+                  <!-- <div *ngIf="ungulateHolderForm.get('identificationNumber')?.errors?.maxlength">Max length of identification Number is 13 character</div> -->
+                  <div *ngIf="ungulateHolderForm.get('identificationNumber')?.errors?.maxlength">Максимална дужина
+                    идентификационог броја је 13 карактера
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="district">
+                  <span class="text-danger"><strong>*</strong></span> Округ:
+                </label>
+                <select name="district" formControlName="district" [compareWith]="compareObjectById" id="district"
+                        class="form-control" (change)="handleDistrictChange(ungulateHolderForm.get('district').value);"
+                        [ngClass]="{ 'is-invalid': ungulateHolderForm.get('district').dirty && ungulateHolderForm.get('district')?.errors, 'is-valid': ungulateHolderForm.get('district').touched && !ungulateHolderForm.get('district')?.errors }">
+                  <option value="">Одаберите ...</option>
+                  <option *ngFor="let dist of districtList;trackBy:trackByIndex" [ngValue]="dist">{{dist.name}}
+                  </option>
+                </select>
+                <div *ngIf="ungulateHolderForm.get('district').dirty && ungulateHolderForm.get('district')?.errors"
+                     class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateHolderForm.get('district')?.errors?.required">District is required</div> -->
+                  <div *ngIf="ungulateHolderForm.get('district')?.errors?.required">Дистрикт је обавезан</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="municipality">
+                  <span class="text-danger"><strong>*</strong></span> Општина:
+                </label>
+                <select id="municipality" formControlName="municipality" [compareWith]="compareObjectById"
+                        name="municipality" class="form-control"
+                        (change)="handleMunicipalityChange(ungulateHolderForm.get('municipality').value)"
+                        [ngClass]="{ 'is-invalid': ungulateHolderForm.get('municipality').dirty && ungulateHolderForm.get('municipality')?.errors, 'is-valid': ungulateHolderForm.get('municipality').touched && !ungulateHolderForm.get('municipality')?.errors }">
+                  <option value="">Одаберите ...</option>
+                  <option *ngFor="let municipality of municipalityList;trackBy: trackByIndex" [ngValue]="municipality">
+                    {{municipality.name}}</option>
+                </select>
+                <div
+                  *ngIf="ungulateHolderForm.get('municipality').dirty && ungulateHolderForm.get('municipality')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateHolderForm.get('municipality')?.errors?.required">Municipality is required</div> -->
+                  <div *ngIf="ungulateHolderForm.get('municipality')?.errors?.required">Општина је обавезна</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="city">
+                  <span class="text-danger"><strong>*</strong></span> Место:
+                </label>
+                <select id="city" formControlName="place" name="city" [compareWith]="compareObjectById"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': ungulateHolderForm.get('place').dirty && ungulateHolderForm.get('place')?.errors, 'is-valid': ungulateHolderForm.get('place').touched && !ungulateHolderForm.get('place')?.errors }">
+                  <option value="">Одаберите ...</option>
+                  <option *ngFor="let place of placesList" [ngValue]="place">{{place.name}}</option>
+                </select>
+                <div *ngIf="ungulateHolderForm.get('place').dirty && ungulateHolderForm.get('place')?.errors"
+                     class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateHolderForm.get('place')?.errors?.required">Location is required</div> -->
+                  <div *ngIf="ungulateHolderForm.get('place')?.errors?.required">Локација је обавезна</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="address">
+                  <span class="text-danger"><strong>*</strong></span> Адреса:
+                </label>
+                <input type="text" formControlName="address" id="address" name="address" class="form-control"
+                       placeholder="Адреса" value=""
+                       [ngClass]="{ 'is-invalid': ungulateHolderForm.get('address').dirty && ungulateHolderForm.get('address')?.errors, 'is-valid': ungulateHolderForm.get('address').touched && !ungulateHolderForm.get('address')?.errors }">
+                <div *ngIf="ungulateHolderForm.get('address').dirty && ungulateHolderForm.get('address')?.errors"
+                     class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateHolderForm.get('address')?.errors?.required">Address is required</div> -->
+                  <div *ngIf="ungulateHolderForm.get('address')?.errors?.required">Адреса је обавезна</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phone-number">
+                  <span class="text-danger"><strong>*</strong></span> Број телефона:
+                </label>
+                <input type="text" formControlName="phone" id="phone-number" name="phone-number" class="form-control"
+                       placeholder="Број телефона" value=""
+                       [ngClass]="{ 'is-invalid': ungulateHolderForm.get('phone').dirty && ungulateHolderForm.get('phone')?.errors, 'is-valid': ungulateHolderForm.get('phone').touched && !ungulateHolderForm.get('phone')?.errors }">
+                <div *ngIf="ungulateHolderForm.get('phone').dirty && ungulateHolderForm.get('phone')?.errors"
+                     class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateHolderForm.get('phone')?.errors?.required">Phone number is required</div> -->
+                  <div *ngIf="ungulateHolderForm.get('phone')?.errors?.required">Број телефона је обавезан</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="farm-type">
+                  <span class="text-danger"><strong>*</strong></span> Тип газдинства:
+                </label>
+                <select id="farm-type" formControlName="farmType" [compareWith]="compareObjectById" name="farm-type"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': ungulateHolderForm.get('farmType').dirty && ungulateHolderForm.get('farmType')?.errors, 'is-valid': ungulateHolderForm.get('farmType').touched && !ungulateHolderForm.get('farmType')?.errors }">
+                  <option value="">Одаберите ...</option>
+                  <option *ngFor="let farmType of farmTypeList;trackBy: trackByIndex" [ngValue]="farmType">
+                    {{farmType.name}}</option>
+                </select>
+                <div *ngIf="ungulateHolderForm.get('farmType').dirty && ungulateHolderForm.get('farmType')?.errors"
+                     class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateHolderForm.get('farmType')?.errors?.required">Farm type is required</div> -->
+                  <div *ngIf="ungulateHolderForm.get('farmType')?.errors?.required">Потребан је тип фарме</div>
+                </div>
+              </div>
+              <div class="form-group form-actions">
+                <button type="submit" class="btn btn-success save-button-medium" [disabled]="loading">
+                  <span *ngIf="!loading">Сачувај</span>
+                  <div *ngIf="loading" class="loader"></div>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

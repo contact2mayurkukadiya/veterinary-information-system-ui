@@ -1,0 +1,516 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h3 class="my-0">Профил копитара</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="ungulateForm" (submit)="createOrUpdateData()">
+
+            <!-- Microchip identification number  -->
+            <div class="form-group">
+              <label for="microchipId">
+                <span class="text-danger"><strong>*</strong></span> Идентификациони број микрочипа:
+              </label>
+              <input type="text" formControlName="microchipId" id="microchipId" name="microchipId"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('microchipId').dirty && ungulateForm.get('microchipId')?.errors, 'is-valid': ungulateForm.get('microchipId').touched && !ungulateForm.get('microchipId')?.errors }"
+                class="form-control" placeholder="Идентификациони број микрочипа">
+              <div *ngIf="ungulateForm.get('microchipId').dirty && ungulateForm.get('microchipId')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('microchipId')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- Date of microchipping -->
+            <div class="form-group">
+              <label for="microchippingDate">
+                <span class="text-danger"><strong>*</strong></span> Датум микрочиповања:
+              </label>
+              <input
+                [ngClass]="{ 'is-invalid': ungulateForm.get('microchippingDate').dirty && ungulateForm.get('microchippingDate')?.errors, 'is-valid': ungulateForm.get('microchippingDate').touched && !ungulateForm.get('microchippingDate')?.errors }"
+                class="form-control" formControlName="microchippingDate" id="microchippingDate" name="microchippingDate"
+                placeholder="Датум микрочиповања" type="date">
+              <div *ngIf="ungulateForm.get('microchippingDate').dirty && ungulateForm.get('microchippingDate')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('microchippingDate')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- UELN (Universal Equine Life Number) -->
+            <div class="form-group">
+              <label for="ueln">
+                UELN (Universal Equine Life Number):
+              </label>
+              <input
+                [ngClass]="{ 'is-invalid': ungulateForm.get('ueln').dirty && ungulateForm.get('ueln')?.errors, 'is-valid': ungulateForm.get('ueln').touched && !ungulateForm.get('ueln')?.errors }"
+                class="form-control" formControlName="ueln" id="ueln" name="ueln"
+                placeholder="UELN (Universal Equine Life Number)" type="text">
+              <div *ngIf="ungulateForm.get('ueln').dirty && ungulateForm.get('ueln')?.errors" class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('ueln')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- Ungulate name -->
+            <div class="form-group">
+              <label for="name">
+                <span class="text-danger"><strong>*</strong></span> Име копитара:
+              </label>
+              <input type="text" formControlName="name" id="name" name="name" class="form-control"
+                placeholder="Име копитара" maxlength="50"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('name').dirty && ungulateForm.get('name')?.errors, 'is-valid': ungulateForm.get('name').touched && !ungulateForm.get('name')?.errors }">
+              <div *ngIf="ungulateForm.get('name').dirty && ungulateForm.get('name')?.errors" class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('name')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- Ungulate mother name -->
+            <div class="form-group">
+              <label for="motherName">
+                Име мајке копитара:
+              </label>
+              <input type="text" formControlName="motherName" id="motherName" name="motherName" class="form-control"
+                placeholder="Име мајке копитара" maxlength="50"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('motherName').dirty && ungulateForm.get('motherName')?.errors, 'is-valid': ungulateForm.get('motherName').touched && !ungulateForm.get('motherName')?.errors }">
+              <div *ngIf="ungulateForm.get('motherName').dirty && ungulateForm.get('motherName')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('motherName')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- Mother microchip identification number -->
+            <div class="form-group">
+              <label for="motherMicrochipId">
+                Идентификациони број микрочипа мајке:
+              </label>
+              <input type="text" formControlName="motherMicrochipId" id="motherMicrochipId" name="motherMicrochipId"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('motherMicrochipId').dirty && ungulateForm.get('motherMicrochipId')?.errors, 'is-valid': ungulateForm.get('motherMicrochipId').touched && !ungulateForm.get('motherMicrochipId')?.errors }"
+                class="form-control" placeholder="Идентификациони број микрочипа мајке">
+              <div *ngIf="ungulateForm.get('motherMicrochipId').dirty && ungulateForm.get('motherMicrochipId')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('motherMicrochipId')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- Ungulate father name -->
+            <div class="form-group">
+              <label for="fatherName">
+                Име оца копитара:
+              </label>
+              <input type="text" formControlName="fatherName" id="fatherName" name="fatherName" class="form-control"
+                placeholder="Име оца копитара"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('fatherName').dirty && ungulateForm.get('fatherName')?.errors, 'is-valid': ungulateForm.get('fatherName').touched && !ungulateForm.get('fatherName')?.errors }">
+              <div *ngIf="ungulateForm.get('fatherName').dirty && ungulateForm.get('fatherName')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('fatherName')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- Father microchip identification number -->
+            <div class="form-group">
+              <label for="fatherMicrochipId">
+                Идентификациони број микрочипа оца:
+              </label>
+              <input type="text" formControlName="fatherMicrochipId" id="fatherMicrochipId" name="fatherMicrochipId"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('fatherMicrochipId').dirty && ungulateForm.get('fatherMicrochipId')?.errors, 'is-valid': ungulateForm.get('fatherMicrochipId').touched && !ungulateForm.get('fatherMicrochipId')?.errors }"
+                class="form-control" placeholder="Идентификациони број микрочипа оца">
+              <div *ngIf="ungulateForm.get('fatherMicrochipId').dirty && ungulateForm.get('fatherMicrochipId')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('fatherMicrochipId')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- Country of birth -->
+            <div class="form-group">
+              <label for="countryOfBirth">
+                <span class="text-danger"><strong>*</strong></span> Земља рођења:
+              </label>
+              <select name="countryOfBirth" formControlName="countryOfBirth" [compareWith]="compareObjectById"
+                id="countryOfBirth" class="form-control"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('countryOfBirth').dirty && ungulateForm.get('countryOfBirth')?.errors, 'is-valid': ungulateForm.get('countryOfBirth').touched && !ungulateForm.get('countryOfBirth')?.errors }">
+                <option value="">Одаберите ...</option>
+                <option *ngFor="let country of countryList;trackBy:trackByIndex" [ngValue]="country">
+                  {{country.name}}
+                </option>
+              </select>
+              <div *ngIf="ungulateForm.get('countryOfBirth').dirty && ungulateForm.get('countryOfBirth')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('countryOfBirth')?.errors?.required">
+                  Молимо вас одаберите!
+                </div>
+              </div>
+            </div>
+
+            <!-- Country of origin -->
+            <div class="form-group">
+              <label for="countryOfOrigin">
+                Земља порекла:
+              </label>
+              <select name="countryOfOrigin" formControlName="countryOfOrigin" [compareWith]="compareObjectById"
+                id="countryOfOrigin" class="form-control"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('countryOfOrigin').dirty && ungulateForm.get('countryOfOrigin')?.errors, 'is-valid': ungulateForm.get('countryOfOrigin').touched && !ungulateForm.get('countryOfOrigin')?.errors }">
+                <option value="">Одаберите ...</option>
+                <option *ngFor="let country of countryList;trackBy:trackByIndex" [ngValue]="country">
+                  {{country.name}}
+                </option>
+              </select>
+              <div *ngIf="ungulateForm.get('countryOfOrigin').dirty && ungulateForm.get('countryOfOrigin')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('countryOfOrigin')?.errors?.required">
+                  Молимо вас одаберите!
+                </div>
+              </div>
+            </div>
+
+            <!-- Date of birth -->
+            <div class="form-group">
+              <label for="dateOfBirth">
+                <span class="text-danger"><strong>*</strong></span> Датум рођења:
+              </label>
+              <input type="date" formControlName="dateOfBirth" id="dateOfBirth" name="dateOfBirth" class="form-control"
+                placeholder="Датум рођења"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('dateOfBirth').dirty && ungulateForm.get('dateOfBirth')?.errors, 'is-valid': ungulateForm.get('dateOfBirth').touched && !ungulateForm.get('dateOfBirth')?.errors }">
+              <div *ngIf="ungulateForm.get('dateOfBirth').dirty && ungulateForm.get('dateOfBirth')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('dateOfBirth')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- Ungulate race -->
+            <div class="form-group">
+              <label for="ungulateRace">
+                <span class="text-danger"><strong>*</strong></span> Раса:
+              </label>
+              <select name="ungulateRace" formControlName="ungulateRace" [compareWith]="compareObjectById"
+                id="ungulateRace" class="form-control"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('ungulateRace').dirty && ungulateForm.get('ungulateRace')?.errors, 'is-valid': ungulateForm.get('ungulateRace').touched && !ungulateForm.get('ungulateRace')?.errors }">
+                <option value="">Одаберите ...</option>
+                <option *ngFor="let race of ungulateRaceList;trackBy:trackByIndex" [ngValue]="race">
+                  {{race.name}}
+                </option>
+              </select>
+              <div *ngIf="ungulateForm.get('ungulateRace').dirty && ungulateForm.get('ungulateRace')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('ungulateRace')?.errors?.required">
+                  Молимо вас одаберите!
+                </div>
+              </div>
+            </div>
+
+            <!-- Hair color and label -->
+            <div class="form-group">
+              <label for="hairColorAndLabel">
+                <span class="text-danger"><strong>*</strong></span> Боја длаке и ознака коња:
+              </label>
+              <input type="text" formControlName="hairColorAndLabel" id="hairColorAndLabel" name="hairColorAndLabel"
+                class="form-control" placeholder="Боја длаке и ознака коња"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('hairColorAndLabel').dirty && ungulateForm.get('hairColorAndLabel')?.errors, 'is-valid': ungulateForm.get('hairColorAndLabel').touched && !ungulateForm.get('hairColorAndLabel')?.errors }">
+              <div *ngIf="ungulateForm.get('hairColorAndLabel').dirty && ungulateForm.get('hairColorAndLabel')?.errors"
+                class="invalid-feedback">
+                <!-- <div *ngIf="ungulateForm.get('hairColorAndLabel')?.errors?.required">hairColorAndLabel is required</div> -->
+                <div *ngIf="ungulateForm.get('hairColorAndLabel')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- sex -->
+            <div class="form-group">
+              <label for="name">
+                <span class="text-danger"><strong>*</strong></span> Пол:
+              </label>
+              <div class="d-flex">
+                <div class="d-flex align-items-center">
+                  <input type="radio" id="male" name="sex" class="radio-button-medium mr-1" formControlName="sex"
+                    value="M">
+                  <label class="form-check-label" for="male">
+                    Мушко
+                  </label>
+                </div>
+                <div class="d-flex ml-3 align-items-center">
+                  <input type="radio" id="female" name="sex" class="radio-button-medium mr-1" formControlName="sex"
+                    value="F">
+                  <label class="form-check-label" for="female">
+                    Женско
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- FEI number -->
+            <div class="form-group">
+              <label for="feiNumber">
+                ФЕИ број:
+              </label>
+              <input type="text" formControlName="feiNumber" id="feiNumber" name="feiNumber" class="form-control"
+                placeholder="ФЕИ број"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('feiNumber').dirty && ungulateForm.get('feiNumber')?.errors, 'is-valid': ungulateForm.get('feiNumber').touched && !ungulateForm.get('feiNumber')?.errors }">
+              <div *ngIf="ungulateForm.get('feiNumber').dirty && ungulateForm.get('feiNumber')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('feiNumber')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- FEI name -->
+            <div class="form-group">
+              <label for="feiName">
+                ФЕИ име:
+              </label>
+              <input type="text" formControlName="feiName" id="feiName" name="feiName" class="form-control"
+                placeholder="ФЕИ име"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('feiName').dirty && ungulateForm.get('feiName')?.errors, 'is-valid': ungulateForm.get('feiName').touched && !ungulateForm.get('feiName')?.errors }">
+              <div *ngIf="ungulateForm.get('feiName').dirty && ungulateForm.get('feiName')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('feiName')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- Ungulate purpose -->
+            <div class="form-group">
+              <label for="ungulatePurpose">
+                <span class="text-danger"><strong>*</strong></span> Намена копитара:
+              </label>
+              <select name="ungulatePurpose" formControlName="ungulatePurpose" [compareWith]="compareObjectById"
+                id="ungulatePurpose" class="form-control"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('ungulatePurpose').dirty && ungulateForm.get('ungulatePurpose')?.errors, 'is-valid': ungulateForm.get('ungulatePurpose').touched && !ungulateForm.get('ungulatePurpose')?.errors }">
+                <option value="">Одаберите ...</option>
+                <option *ngFor="let purpose of ungulatePurposeList;trackBy:trackByIndex" [ngValue]="purpose">
+                  {{purpose.name}}
+                </option>
+              </select>
+              <div *ngIf="ungulateForm.get('ungulatePurpose').dirty && ungulateForm.get('ungulatePurpose')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('ungulatePurpose')?.errors?.required">
+                  Молимо вас одаберите!
+                </div>
+              </div>
+            </div>
+
+            <!-- Food chain -->
+            <div class="form-group d-flex align-items-center">
+              <label for="foodChain" class="mb-0 mr-2">
+                <span class="text-danger"><strong>*</strong></span> Ланац исхране:
+              </label>
+              <label class="switch switch-label switch-primary my-0">
+                <input type="checkbox" class="switch-input" id="foodChain" formControlName="foodChain">
+                <span class="switch-slider" data-checked="Да" data-unchecked="Не"></span>
+              </label>
+            </div>
+
+            <!-- Ungulate owner -->
+            <div class="form-group">
+              <label for="ungulateOwner">
+                <span class="text-danger"><strong>*</strong></span> Власник копитара:
+              </label>
+              <select name="ungulateOwner" formControlName="ungulateOwner" [compareWith]="compareObjectById"
+                id="ungulateOwner" class="form-control"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('ungulateOwner').dirty && ungulateForm.get('ungulateOwner')?.errors, 'is-valid': ungulateForm.get('ungulateOwner').touched && !ungulateForm.get('ungulateOwner')?.errors }">
+                <option value="">Одаберите ...</option>
+                <option *ngFor="let owner of ungulateOwnerList;trackBy:trackByIndex" [ngValue]="owner">
+                  {{owner.name || owner.companyName}}
+                </option>
+              </select>
+              <div *ngIf="ungulateForm.get('ungulateOwner').dirty && ungulateForm.get('ungulateOwner')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('ungulateOwner')?.errors?.required">
+                  Молимо вас одаберите!
+                </div>
+              </div>
+            </div>
+
+            <!-- Ungulate holder -->
+            <div class="form-group">
+              <label for="ungulateHolder">
+                <span class="text-danger"><strong>*</strong></span> Држалац копитара:
+              </label>
+              <select name="ungulateHolder" formControlName="ungulateHolder" [compareWith]="compareObjectById"
+                id="ungulateHolder" class="form-control"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('ungulateHolder').dirty && ungulateForm.get('ungulateHolder')?.errors, 'is-valid': ungulateForm.get('ungulateHolder').touched && !ungulateForm.get('ungulateHolder')?.errors }">
+                <option value="">Одаберите ...</option>
+                <option *ngFor="let race of ungulateHolderList;trackBy:trackByIndex" [ngValue]="race">
+                  {{race.name}}
+                </option>
+              </select>
+              <div *ngIf="ungulateForm.get('ungulateHolder').dirty && ungulateForm.get('ungulateHolder')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('ungulateHolder')?.errors?.required">
+                  Молимо вас одаберите!
+                </div>
+              </div>
+            </div>
+
+            <!-- Ungulate passport -->
+            <div class="form-group">
+              <label for="passport">
+                Пасош копитара:
+              </label>
+              <input type="text" formControlName="passport" id="passport" name="passport" class="form-control"
+                placeholder="Пасош копитара"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('passport').dirty && ungulateForm.get('passport')?.errors, 'is-valid': ungulateForm.get('passport').touched && !ungulateForm.get('passport')?.errors }">
+              <div *ngIf="ungulateForm.get('passport').dirty && ungulateForm.get('passport')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('passport')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- Passport date -->
+            <div class="form-group">
+              <label for="passportDate">
+                <span class="text-danger"><strong>*</strong></span> Датум издавања пасоша:
+              </label>
+              <input type="date" formControlName="passportDate" id="passportDate" name="passportDate"
+                class="form-control" placeholder="Датум издавања пасоша"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('passportDate').dirty && ungulateForm.get('passportDate')?.errors, 'is-valid': ungulateForm.get('passportDate').touched && !ungulateForm.get('passportDate')?.errors }">
+              <div *ngIf="ungulateForm.get('passportDate').dirty && ungulateForm.get('passportDate')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('passportDate')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <!-- Passport issuing country -->
+            <div class="form-group">
+              <label for="passportIssuingCountry">
+                Земља издавања пасоша:
+              </label>
+              <select name="passportCountry " formControlName="passportCountry" [compareWith]="compareObjectById"
+                id="passportCountry" class="form-control"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('passportCountry').dirty && ungulateForm.get('passportCountry')?.errors, 'is-valid': ungulateForm.get('passportCountry').touched && !ungulateForm.get('passportCountry')?.errors }">
+                <option value="">Одаберите ...</option>
+                <option *ngFor="let country of countryList;trackBy:trackByIndex" [ngValue]="country">
+                  {{country.name}}
+                </option>
+              </select>
+              <div *ngIf="ungulateForm.get('passportCountry').dirty && ungulateForm.get('passportCountry')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('passportCountry')?.errors?.required">
+                  Молимо вас одаберите!
+                </div>
+              </div>
+            </div>
+
+            <!-- Passport issued by -->
+            <div class="form-group">
+              <label for="passportIssuedBy">
+                Пасош издат од:
+              </label>
+              <input type="text" formControlName="passportIssuedBy" id="passportIssuedBy" name="passportIssuedBy"
+                class="form-control" placeholder="Пасош издат од"
+                [ngClass]="{ 'is-invalid': ungulateForm.get('passportIssuedBy').dirty && ungulateForm.get('passportIssuedBy')?.errors, 'is-valid': ungulateForm.get('passportIssuedBy').touched && !ungulateForm.get('passportIssuedBy')?.errors }">
+              <div *ngIf="ungulateForm.get('passportIssuedBy').dirty && ungulateForm.get('passportIssuedBy')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateForm.get('passportIssuedBy')?.errors?.required">
+                  Молимо вас попуните поље!
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group form-actions">
+              <button type="submit" class="btn btn-success save-button-medium" [disabled]="loading">
+                <span *ngIf="!loading">Сачувај</span>
+                <span *ngIf="loading" class="loader"></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h3 class="my-0">Отпреми слике копитара</h3>
+        </div>
+        <div class="card-body">
+
+          <form [formGroup]="ungulateImageForm" (submit)="createOrUpdateUngulateImages()">
+
+            <!-- Ungulates -->
+            <div class="form-group">
+              <label for="ungulate">
+                <span class="text-danger"><strong>*</strong></span> копитари:
+              </label>
+              <select name="ungulate" formControlName="ungulate" [compareWith]="compareObjectById" id="ungulate"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': ungulateImageForm.get('ungulate').dirty && ungulateImageForm.get('ungulate')?.errors, 'is-valid': ungulateImageForm.get('ungulate').touched && !ungulateImageForm.get('ungulate')?.errors }">
+                <option value="">Одаберите ...</option>
+                <option *ngFor="let ungulate of ungulateList;trackBy:trackByIndex" [ngValue]="ungulate">
+                  {{ungulate.name}}
+                </option>
+              </select>
+              <div *ngIf="ungulateImageForm.get('ungulate').dirty && ungulateImageForm.get('ungulate')?.errors"
+                class="invalid-feedback">
+                <div *ngIf="ungulateImageForm.get('ungulate')?.errors?.required">
+                  Неопходан је копитар!
+                </div>
+              </div>
+            </div>
+
+            <div class='file-input mb-2'>
+              <input type='file' #file class="upload-control" accept="image/*" multiple="true"
+                (change)="handleFileInputChange($event)" />
+              <button type="button" class='btn button w-100' (click)="file.click();"
+                [ngClass]="{'mb-3': ungulateImages.length > 0 }">Одаберите</button>
+              <div class="d-flex flex-wrap">
+                <ng-container *ngIf="ungulateImages.length > 0">
+                  <div class="preview-wrapper" *ngFor="let image of ungulateImagesPreview; let i = index">
+                    <img [src]="image" [alt]="image" />
+                    <button type="button" class="btn btn-danger preview-close-button" (click)="removeFileFromList(i)">
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="mode == 'edit'">
+                  <div class="preview-wrapper" *ngFor="let image of inputData.ungulateImages; let i = index">
+                    <img src="{{assetsURL + '/' + image.imageName}}" />
+                    <!-- <img src="./assets/img/avatars/1.jpg" [alt]="image.imageName" /> -->
+                    <!-- <button type="button" class="btn btn-danger preview-close-button"  (click)="deleteFromServer(i)">
+                          <i class="fa fa-times"></i>
+                        </button> -->
+                  </div>
+                </ng-container>
+              </div>
+
+            </div>
+
+            <div class="form-group form-actions">
+              <button type="submit" class="btn btn-success save-button-medium" [disabled]="uploadLoader">
+                <span *ngIf="!uploadLoader">Upload</span>
+                <span *ngIf="uploadLoader" class="loader"></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

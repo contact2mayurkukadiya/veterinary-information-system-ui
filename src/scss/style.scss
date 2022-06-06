@@ -1,0 +1,104 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles with default layout.
+// If you are going to use dark layout please comment next line
+@import "~@coreui/coreui-pro/scss/coreui";
+
+// Import styles with dark layout
+// If you want to use dark layout uncomment next line
+//@import "~@coreui/coreui-pro/scss/themes/dark/coreui-dark";
+
+// If you want to add something do it here
+@import "custom";
+
+// Spinkit
+$spinkit-spinner-color: $body-color;
+@import '~spinkit/scss/spinkit.scss';
+
+
+.file-input {
+  display: inline-block;
+  text-align: left;
+  background: #f0f3f5;
+  padding: 16px;
+  width: 450px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.file-input>[type='file'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  opacity: 0;
+  z-index: -1;
+  cursor: pointer;
+}
+
+.file-input>.button {
+  display: inline-block;
+  cursor: pointer;
+  background: #094089;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin-right: 8px;
+}
+
+.file-input>.upload-control:hover~.button {
+  background: dodgerblue;
+  color: white;
+}
+
+.file-input>.label {
+  color: #333;
+  white-space: nowrap;
+  opacity: .3;
+}
+
+.file-input.-chosen>.label {
+  opacity: 1;
+}
+
+.file-item button {
+  padding: 5px;
+  height: 24px;
+  display: inline-flex;
+}
+
+.preview-wrapper {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  margin: 5px;
+  margin-right: 10px;
+  margin-top: 10px;
+  position: relative;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid #f86c6b;
+  }
+
+  .preview-close-button {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

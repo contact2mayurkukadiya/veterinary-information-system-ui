@@ -1,0 +1,239 @@
+<div class="btn-group pull-right" role="group" aria-label="Basic outlined example">
+  <button class="btn btn-info text-white mb-4 pull-right" data-toggle="modal" (click)="filterUngulates();">
+    <i class="fa fa-filter mr-1" aria-hidden="true"></i> <span>Филтери</span>
+  </button>
+  <a [routerLink]="['/dashboard/kopitari/profil']" class="btn btn-success mb-4 pull-right">
+    <i class="fa fa-plus-circle mr-1" aria-hidden="true"></i> <span>Креирај копитара</span>
+  </a>
+</div>
+<div class="clearfix"></div>
+<div class="animated fadeIn">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-12">
+          <h3 class="mb-2">Регистар копитара</h3>
+        </div>
+      </div>
+      <table class="table table-responsive-sm table-striped table-hover" [mfData]="ungulateList" #mf="mfDataTable"
+        [mfRowsOnPage]="pageSize">
+        <thead>
+          <tr>
+            <th class="text-center text-uppercase">Р. бр.</th>
+            <th class="text-center text-uppercase">
+              <mfDefaultSorter by="microchipIdentificationNumber" #microchipIdentificationNumber>
+                Идентификациони број микрочипа
+                <span *ngIf="microchipIdentificationNumber.isSortedByMeAsc" class="cui-arrow-top"
+                  aria-hidden="true"></span>
+                <span *ngIf="microchipIdentificationNumber.isSortedByMeDesc" class="cui-arrow-bottom"
+                  aria-hidden="true"></span>
+              </mfDefaultSorter>
+            </th>
+            <th class="text-center text-uppercase">
+              <mfDefaultSorter by="dateOfMicrochipping" #dateOfMicrochipping>
+                Датум микрочипирања
+                <span *ngIf="dateOfMicrochipping.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+                <span *ngIf="dateOfMicrochipping.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+              </mfDefaultSorter>
+            </th>
+            <th class="text-center text-uppercase">
+              <mfDefaultSorter by="UELN" #UELN>
+                UELN
+                <span *ngIf="UELN.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+                <span *ngIf="UELN.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+              </mfDefaultSorter>
+            </th>
+            <th class="text-center text-uppercase">
+              <mfDefaultSorter by="ungulateName" #ungulateName>
+                Име копитара
+                <span *ngIf="ungulateName.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+                <span *ngIf="ungulateName.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+              </mfDefaultSorter>
+            </th>
+            <th class="text-center text-uppercase">
+              <mfDefaultSorter by="countryOfBirth" #countryOfBirth>
+                Земља рођења
+                <span *ngIf="countryOfBirth.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+                <span *ngIf="countryOfBirth.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+              </mfDefaultSorter>
+            </th>
+            <th class="text-center text-uppercase">
+              <mfDefaultSorter by="countryOfOrigin" #countryOfOrigin>
+                Земља порекла
+                <span *ngIf="countryOfOrigin.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+                <span *ngIf="countryOfOrigin.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+              </mfDefaultSorter>
+            </th>
+            <th class="text-center text-uppercase">
+              <mfDefaultSorter by="Race" #Race>
+                Трка
+                <span *ngIf="Race.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+                <span *ngIf="Race.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+              </mfDefaultSorter>
+            </th>
+            <th class="text-center text-uppercase">
+              <mfDefaultSorter by="ungulatePassport" #ungulatePassport>
+                Пасош копитара
+                <span *ngIf="ungulatePassport.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+                <span *ngIf="ungulatePassport.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+              </mfDefaultSorter>
+            </th>
+            <th class="text-center text-uppercase">Уреди</th>
+            <th class="text-center text-uppercase">принт</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="mf.data.length > 0 && !loading">
+            <tr *ngFor="let item of mf.data; let i = index">
+              <td class="text-center align-middle">{{i + 1}}</td>
+              <td class="text-center align-middle">{{item.microchipId}}</td>
+              <td class="text-center align-middle">{{item.microchippingDate}}</td>
+              <td class="text-center align-middle">{{item.ueln}}</td>
+              <td class="text-center align-middle">{{item.name}}</td>
+              <td class="text-center align-middle">{{item.countryOfBirth.name}}</td>
+              <td class="text-center align-middle">{{item.countryOfOrigin.name}}</td>
+              <td class="text-center align-middle">{{item.ungulateRace.race}}</td>
+              <td class="text-center align-middle">{{item.passport}}</td>
+              <td class="text-center align-middle">
+                <button type="button" class="btn btn-info text-light" title="Уреди" (click)="updateUngulate(item)">
+                  <i class="fa fa-pencil"></i>
+                </button>
+              </td>
+              <td class="text-center align-middle">
+                <button type="button" class="btn btn-info text-light" title="принт">
+                  <i class="fa fa-print"></i>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-container *ngIf="mf.data.length <= 0 && !loading">
+            <tr class="text-center">
+              <td colspan="11">Нема података</td>
+            </tr>
+          </ng-container>
+          <ng-container *ngIf="loading">
+            <tr>
+              <td colspan="11">
+                <div class="d-flex align-items-center justify-content-center">
+                  <div class="loader"></div>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7">
+              <div class="col-xs-12 col-12" *ngIf="totalPages > 1">
+                <pagination [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                  lastText="&raquo;" [totalItems]="totalItems" [itemsPerPage]="pageSize" [(ngModel)]="pageNumber"
+                  (pageChanged)="pageChanged($event)">
+                </pagination>
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #customModal>
+  <app-modal [modalRef]="modalRef" [modalTitle]="modalTitle" [hasFooter]="false">
+    <form [formGroup]="ungulateFilterForm" (submit)="submitForm();">
+      <!-- Microchip identification number  -->
+      <div class="form-group">
+        <label for="microchipId">
+          <span class="text-danger"><strong>*</strong></span> Идентификациони број микрочипа:
+        </label>
+        <input type="text" formControlName="microchipId" id="microchipId" name="microchipId" class="form-control"
+          placeholder="Идентификациони број микрочипа">
+      </div>
+
+      <!-- Date of microchipping -->
+      <div class="form-group">
+        <label for="chippingDate">
+          <span class="text-danger"><strong>*</strong></span> Датум микрочиповања:
+        </label>
+        <input class="form-control" formControlName="chippingDate" id="chippingDate" name="chippingDate"
+          placeholder="Датум микрочиповања" type="date">
+      </div>
+
+      <!-- UELN (Universal Equine Life Number) -->
+      <div class="form-group">
+        <label for="ueln">
+          UELN (Universal Equine Life Number):
+        </label>
+        <input class="form-control" formControlName="ueln" id="ueln" name="ueln"
+          placeholder="UELN (Universal Equine Life Number)" type="text">
+      </div>
+
+      <!-- Ungulate name -->
+      <div class="form-group">
+        <label for="name">
+          <span class="text-danger"><strong>*</strong></span> Име копитара:
+        </label>
+        <input type="text" formControlName="name" id="name" name="name" class="form-control" placeholder="Име копитара"
+          maxlength="50">
+      </div>
+
+      <!-- Country of birth -->
+      <div class="form-group">
+        <label for="countryOfBirth">
+          <span class="text-danger"><strong>*</strong></span> Земља рођења:
+        </label>
+        <select name="countryOfBirth" formControlName="countryOfBirth" [compareWith]="compareObjectById"
+          id="countryOfBirth" class="form-control">
+          <option value="">Одаберите ...</option>
+          <option *ngFor="let country of countryList;trackBy:trackByIndex" [ngValue]="country">
+            {{country.name}}
+          </option>
+        </select>
+      </div>
+
+      <!-- Country of origin -->
+      <div class="form-group">
+        <label for="countryOfOrigin">
+          Земља порекла:
+        </label>
+        <select name="countryOfOrigin" formControlName="countryOfOrigin" [compareWith]="compareObjectById"
+          id="countryOfOrigin" class="form-control">
+          <option value="">Одаберите ...</option>
+          <option *ngFor="let country of countryList;trackBy:trackByIndex" [ngValue]="country">
+            {{country.name}}
+          </option>
+        </select>
+      </div>
+
+      <!-- Ungulate race -->
+      <div class="form-group">
+        <label for="ungulateRace">
+          <span class="text-danger"><strong>*</strong></span> Раса:
+        </label>
+        <select name="ungulateRace" formControlName="ungulateRace" [compareWith]="compareObjectById" id="ungulateRace"
+          class="form-control">
+          <option value="">Одаберите ...</option>
+          <option *ngFor="let race of ungulateRaceList;trackBy:trackByIndex" [ngValue]="race">
+            {{race.name}}
+          </option>
+        </select>
+      </div>
+
+      <!-- Ungulate passport -->
+      <div class="form-group">
+        <label for="passport">
+          Пасош копитара:
+        </label>
+        <input type="text" formControlName="passport" id="passport" name="passport" class="form-control"
+          placeholder="Пасош копитара">
+      </div>
+
+      <div class="d-flex align-items-center justify-content-center">
+        <button type="submit" class="btn btn-primary mr-2 mt-2 save-button-medium">Примени</button>
+        <button type="button" class="btn btn-danger mt-2 save-button-medium " (click)="resetFilters()"
+          *ngIf="isSearching == true">Ресетујте филтере
+        </button>
+      </div>
+    </form>
+  </app-modal>
+</ng-template>

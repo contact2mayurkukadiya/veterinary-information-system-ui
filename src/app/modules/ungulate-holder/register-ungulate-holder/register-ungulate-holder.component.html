@@ -1,0 +1,144 @@
+<div class="btn-group pull-right" role="group" aria-label="Basic outlined example">
+  <button class="btn btn-info text-white mb-4 pull-right" data-toggle="modal" (click)="filterUngulateHolder();">
+    <i class="fa fa-filter mr-1" aria-hidden="true"></i> <span>Филтери</span>
+  </button>
+  <a [routerLink]="['/dashboard/drzalac-kopitara/profil']" class="btn btn-success mb-4 pull-right">
+    <i class="fa fa-plus-circle mr-1" aria-hidden="true"></i> <span>Креирај држаоца копитара</span>
+  </a>
+</div>
+<div class="clearfix"></div>
+<div class="animated fadeIn">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-12">
+          <h3 class="mb-2">Регистар држалаца копитара</h3>
+        </div>
+      </div>
+      <table class="table table-responsive-sm table-striped table-hover" [mfData]="ungulateHolderList" #mf="mfDataTable"
+             [mfRowsOnPage]="pageSize">
+        <thead>
+        <tr>
+          <th class="text-center text-uppercase">Р. бр.</th>
+          <th class="text-center text-uppercase">
+            <mfDefaultSorter by="name" #sortName>
+              Име
+              <span *ngIf="sortName.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+              <span *ngIf="sortName.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+            </mfDefaultSorter>
+          </th>
+          <th class="text-center text-uppercase">
+            <mfDefaultSorter by="name" #sortName>
+              Презиме
+              <span *ngIf="sortName.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+              <span *ngIf="sortName.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+            </mfDefaultSorter>
+          </th>
+          <th class="text-center text-uppercase">
+            <mfDefaultSorter by="name" #sortName>
+              ЈМБГ
+              <span *ngIf="sortName.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+              <span *ngIf="sortName.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+            </mfDefaultSorter>
+          </th>
+          <th class="text-center text-uppercase">
+            <mfDefaultSorter by="name" #sortName>
+              Место
+              <span *ngIf="sortName.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+              <span *ngIf="sortName.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+            </mfDefaultSorter>
+          </th>
+          <th class="text-center text-uppercase">
+            <mfDefaultSorter by="active" #sortStatus>
+              Активан
+              <span *ngIf="sortStatus.isSortedByMeAsc" class="cui-arrow-top" aria-hidden="true"></span>
+              <span *ngIf="sortStatus.isSortedByMeDesc" class="cui-arrow-bottom" aria-hidden="true"></span>
+            </mfDefaultSorter>
+          </th>
+          <th class="text-center text-uppercase">Уреди</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngIf="mf.data.length > 0 && !loading">
+          <tr *ngFor="let item of mf.data; let i = index">
+            <td class="text-center align-middle">{{i + 1}}</td>
+            <td class="text-center align-middle">{{item.name}}</td>
+            <td class="text-center align-middle">{{item.surname}}</td>
+            <td class="text-center align-middle">{{item.identificationNumber}}</td>
+            <td class="text-center align-middle">{{item.place.name}}</td>
+            <td class="text-center align-middle">
+              <label class="switch switch-label switch-primary my-0">
+                <input type="checkbox" class="switch-input" [checked]="item.active" [(ngModel)]="item.active"
+                       (change)="deactivateungulateHolder(item)">
+                <span class="switch-slider" data-checked="Да" data-unchecked="Не"></span>
+              </label>
+            </td>
+            <td class="text-center align-middle">
+              <button type="button" class="btn btn-info text-light" title="Уреди" (click)="updateUngulateHolder(item)">
+                <i class="fa fa-pencil"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf="mf.data.length <= 0 && !loading">
+          <tr class="text-center">
+            <td colspan="7">Нема података</td>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf="loading">
+          <tr>
+            <td colspan="7">
+              <div class="d-flex align-items-center justify-content-center">
+                <div class="loader"></div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="7">
+            <div class="col-xs-12 col-12" *ngIf="totalPages > 1">
+              <pagination [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                          lastText="&raquo;" [totalItems]="totalItems" [itemsPerPage]="pageSize"
+                          [(ngModel)]="pageNumber" (pageChanged)="pageChanged($event)">
+              </pagination>
+            </div>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #customModal>
+  <app-modal [modalRef]="modalRef" [modalTitle]="modalTitle" [hasFooter]="false">
+    <form [formGroup]="ungulateHolderForm" (submit)="submitForm();">
+      <div class="form-group">
+        <label for="hid">ХИД:</label>
+        <input type="text" id="hid" name="hid" formControlName="hid" class="form-control" placeholder="ХИД" value="">
+      </div>
+      <div class="form-group">
+        <label for="name">Име:</label>
+        <input type="text" id="name" name="name" formControlName="name" class="form-control" placeholder="Име" value="">
+      </div>
+      <div class="form-group">
+        <label for="surname">Презиме:</label>
+        <input type="text" id="surname" name="surname" formControlName="surname" class="form-control"
+               placeholder="Презиме" value="">
+      </div>
+      <div class="form-group">
+        <label for="unique-identification-number">ЈМБГ:</label>
+        <input type="text" id="unique-identification-number" formControlName="identificationNumber"
+               name="unique-identification-number" class="form-control" placeholder="ЈМБГ" value="" maxlength="13">
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <button type="submit" class="btn btn-primary mr-2 mt-2 save-button-medium">Примени</button>
+        <button type="button" class="btn btn-danger mt-2 save-button-medium " (click)="resetFilters()"
+                *ngIf="isSearching == true">Ресетујте филтере
+        </button>
+      </div>
+    </form>
+  </app-modal>
+</ng-template>

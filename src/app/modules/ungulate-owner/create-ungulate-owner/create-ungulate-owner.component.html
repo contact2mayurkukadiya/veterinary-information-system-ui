@@ -1,0 +1,223 @@
+<div class="animated fadeIn">
+  <form action="" method="post">
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header">
+            <h3 class="my-0">{{pageTitle}}</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="ungulateOwnerForm" (submit)="createOrUpdateData()">
+              <div class="form-group">
+                <label for="name">
+                  <span class="text-danger"><strong>*</strong></span> Тип власника:
+                </label>
+                <div class="d-flex">
+                  <div class="d-flex align-items-center">
+                    <input type="radio" id="individual" name="ownerType" class="radio-button-medium mr-1" [ngModelOptions]="{standalone: true}" [(ngModel)]="ownerType" value="individual" (change)="ownerTypeChange()">
+                    <label class="form-check-label" for="individual">
+                      <!-- Individual -->
+                      Физичко лице
+                    </label>
+                  </div>
+                  <div class="d-flex ml-3 align-items-center">
+                    <input type="radio" id="legal" name="ownerType" class="radio-button-medium mr-1" [ngModelOptions]="{standalone: true}" [(ngModel)]="ownerType" value="legal" (change)="ownerTypeChange()">
+                    <label class="form-check-label" for="legal">
+                      <!-- Legal -->
+                      Правно лице
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="ownerType == 'individual'">
+                <label for="name">
+                  <span class="text-danger"><strong>*</strong></span> Име:
+                </label>
+                <input type="text" formControlName="name" id="name" name="name" class="form-control" placeholder="Име"
+                  maxlength="50"
+                  [ngClass]="{ 'is-invalid': ungulateOwnerForm.get('name').dirty && ungulateOwnerForm.get('name')?.errors, 'is-valid': ungulateOwnerForm.get('name').touched && !ungulateOwnerForm.get('name')?.errors }">
+                <div *ngIf="ungulateOwnerForm.get('name').dirty && ungulateOwnerForm.get('name')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateOwnerForm.get('name')?.errors?.required">Name is required</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('name')?.errors?.required">Име је обавезно</div>
+                  <!-- <div *ngIf="ungulateOwnerForm.get('name')?.errors?.maxlength">Max length of name is 50 character</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('name')?.errors?.maxlength">Максимална дужина имена је 50 знакова
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="ownerType == 'individual'">
+                <label for="surname">
+                  <span class="text-danger"><strong>*</strong></span> Презиме:
+                </label>
+                <input type="text" formControlName="surname" id="surname" name="surname" class="form-control"
+                  placeholder="Презиме" maxlength="50"
+                  [ngClass]="{ 'is-invalid': ungulateOwnerForm.get('surname').dirty && ungulateOwnerForm.get('surname')?.errors, 'is-valid': ungulateOwnerForm.get('surname').touched && !ungulateOwnerForm.get('surname')?.errors }">
+                <div *ngIf="ungulateOwnerForm.get('surname').dirty && ungulateOwnerForm.get('surname')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateOwnerForm.get('surname')?.errors?.required">Surname is required</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('surname')?.errors?.required">Презиме је обавезно
+                  </div>
+                  <!-- <div *ngIf="ungulateOwnerForm.get('surname')?.errors?.maxlength">Max length of surname is 50 character</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('surname')?.errors?.maxlength">Максимална дужина презимена је 50
+                    карактера
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="ownerType == 'legal'">
+                <label for="name">
+                  <span class="text-danger"><strong>*</strong></span> Име компаније:
+                </label>
+                <input type="text" formControlName="companyName" id="companyName" name="companyName" class="form-control" placeholder="Име компаније"
+                  maxlength="50"
+                  [ngClass]="{ 'is-invalid': ungulateOwnerForm.get('companyName').dirty && ungulateOwnerForm.get('companyName')?.errors, 'is-valid': ungulateOwnerForm.get('companyName').touched && !ungulateOwnerForm.get('companyName')?.errors }">
+                <div *ngIf="ungulateOwnerForm.get('companyName').dirty && ungulateOwnerForm.get('companyName')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateOwnerForm.get('name')?.errors?.required">Company Name is required</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('companyName')?.errors?.required">Назив компаније је обавезан</div>
+                  <!-- <div *ngIf="ungulateOwnerForm.get('name')?.errors?.maxlength">Max length of company name is 50 character</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('companyName')?.errors?.maxlength">Максимална дужина назива компаније је 50 знакова</div>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="ownerType == 'individual'">
+                <label for="unique-identification-number">
+                  <span class="text-danger"><strong>*</strong></span> Матични број:
+                </label>
+                <input type="text" formControlName="identificationNumber" id="unique-identification-number"
+                  name="unique-identification-number" class="form-control" placeholder="Матични број" maxlength="13"
+                  [ngClass]="{ 'is-invalid': ungulateOwnerForm.get('identificationNumber').dirty && ungulateOwnerForm.get('identificationNumber')?.errors, 'is-valid': ungulateOwnerForm.get('identificationNumber').touched && !ungulateOwnerForm.get('identificationNumber')?.errors }">
+                <div
+                  *ngIf="ungulateOwnerForm.get('identificationNumber').dirty && ungulateOwnerForm.get('identificationNumber')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateOwnerForm.get('identificationNumber')?.errors?.required">Identification number is required</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('identificationNumber')?.errors?.required">
+                    Идентификациони број је обавезан
+                  </div>
+                  <!-- <div *ngIf="ungulateOwnerForm.get('identificationNumber')?.errors?.maxlength">Max length of identification Number is 13 character</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('identificationNumber')?.errors?.maxlength">
+                    Максимална дужина идентификационог броја је 13 карактера</div>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="ownerType == 'legal'">
+                <label for="company-identification-number">
+                  <span class="text-danger"><strong>*</strong></span> Идентификациони број компаније:
+                </label>
+                <input type="text" formControlName="companyIdentificationNumber" id="company-identification-number"
+                  name="company-identification-number" class="form-control" placeholder="Идентификациони број компаније" maxlength="13"
+                  [ngClass]="{ 'is-invalid': ungulateOwnerForm.get('companyIdentificationNumber').dirty && ungulateOwnerForm.get('companyIdentificationNumber')?.errors, 'is-valid': ungulateOwnerForm.get('companyIdentificationNumber').touched && !ungulateOwnerForm.get('companyIdentificationNumber')?.errors }">
+                <div
+                  *ngIf="ungulateOwnerForm.get('companyIdentificationNumber').dirty && ungulateOwnerForm.get('companyIdentificationNumber')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateOwnerForm.get('companyIdentificationNumber')?.errors?.required">Company Identification Number is required</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('companyIdentificationNumber')?.errors?.required">Потребан је идентификациони број компаније</div>
+                  <!-- <div *ngIf="ungulateOwnerForm.get('companyIdentificationNumber')?.errors?.maxlength">Max length of company identification Number is 13 character</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('companyIdentificationNumber')?.errors?.maxlength">Максимална дужина идентификационог броја компаније је 13 карактера</div>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="ownerType == 'individual'">
+                <label for="name">
+                  Пасош:
+                </label>
+                <input type="text" formControlName="passport" id="passport" name="passport" class="form-control" placeholder="Пасош" maxlength="100">
+                <div *ngIf="ungulateOwnerForm.get('passport').dirty && ungulateOwnerForm.get('passport')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateOwnerForm.get('name')?.errors?.maxlength">Max length of passport is 100 character</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('passport')?.errors?.maxlength">Максимална дужина пасоша је 100 карактера</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="district">
+                  <span class="text-danger"><strong>*</strong></span> Округ:
+                </label>
+                <select name="district" formControlName="district" [compareWith]="compareObjectById" id="district"
+                  class="form-control" (change)="handleDistrictChange(ungulateOwnerForm.get('district').value);"
+                  [ngClass]="{ 'is-invalid': ungulateOwnerForm.get('district').dirty && ungulateOwnerForm.get('district')?.errors, 'is-valid': ungulateOwnerForm.get('district').touched && !ungulateOwnerForm.get('district')?.errors }">
+                  <option value="">Одаберите ...</option>
+                  <option *ngFor="let dist of districtList;trackBy:trackByIndex" [ngValue]="dist">
+                    {{dist.name}}
+                  </option>
+                </select>
+                <div *ngIf="ungulateOwnerForm.get('district').dirty && ungulateOwnerForm.get('district')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateOwnerForm.get('district')?.errors?.required">District is required</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('district')?.errors?.required">Дистрикт је обавезан
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="municipality">
+                  <span class="text-danger"><strong>*</strong></span> Општина:
+                </label>
+                <select id="municipality" formControlName="municipality" [compareWith]="compareObjectById"
+                  name="municipality" class="form-control"
+                  (change)="handleMunicipalityChange(ungulateOwnerForm.get('municipality').value)"
+                  [ngClass]="{ 'is-invalid': ungulateOwnerForm.get('municipality').dirty && ungulateOwnerForm.get('municipality')?.errors, 'is-valid': ungulateOwnerForm.get('municipality').touched && !ungulateOwnerForm.get('municipality')?.errors }">
+                  <option value="">Одаберите ...</option>
+                  <option *ngFor="let municipality of municipalityList;trackBy: trackByIndex" [ngValue]="municipality">
+                    {{municipality.name}}</option>
+                </select>
+                <div
+                  *ngIf="ungulateOwnerForm.get('municipality').dirty && ungulateOwnerForm.get('municipality')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateOwnerForm.get('municipality')?.errors?.required">Municipality is required</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('municipality')?.errors?.required">Општина је обавезна
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="city">
+                  <span class="text-danger"><strong>*</strong></span> Место:
+                </label>
+                <select id="city" formControlName="place" name="city" [compareWith]="compareObjectById"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': ungulateOwnerForm.get('place').dirty && ungulateOwnerForm.get('place')?.errors, 'is-valid': ungulateOwnerForm.get('place').touched && !ungulateOwnerForm.get('place')?.errors }">
+                  <option value="">Одаберите ...</option>
+                  <option *ngFor="let place of placesList" [ngValue]="place">{{place.name}}</option>
+                </select>
+                <div *ngIf="ungulateOwnerForm.get('place').dirty && ungulateOwnerForm.get('place')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateOwnerForm.get('place')?.errors?.required">Location is required</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('place')?.errors?.required">Локација је обавезна
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="address">
+                  <span class="text-danger"><strong>*</strong></span> Адреса:
+                </label>
+                <input type="text" formControlName="address" id="address" name="address" class="form-control"
+                  placeholder="Адреса" value=""
+                  [ngClass]="{ 'is-invalid': ungulateOwnerForm.get('address').dirty && ungulateOwnerForm.get('address')?.errors, 'is-valid': ungulateOwnerForm.get('address').touched && !ungulateOwnerForm.get('address')?.errors }">
+                <div *ngIf="ungulateOwnerForm.get('address').dirty && ungulateOwnerForm.get('address')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateOwnerForm.get('address')?.errors?.required">Address is required</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('address')?.errors?.required">Адреса је обавезна
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phone-number">
+                  <span class="text-danger"><strong>*</strong></span> Број телефона:
+                </label>
+                <input type="text" formControlName="phone" id="phone-number" name="phone-number" class="form-control"
+                  placeholder="Број телефона" value=""
+                  [ngClass]="{ 'is-invalid': ungulateOwnerForm.get('phone').dirty && ungulateOwnerForm.get('phone')?.errors, 'is-valid': ungulateOwnerForm.get('phone').touched && !ungulateOwnerForm.get('phone')?.errors }">
+                <div *ngIf="ungulateOwnerForm.get('phone').dirty && ungulateOwnerForm.get('phone')?.errors"
+                  class="invalid-feedback">
+                  <!-- <div *ngIf="ungulateOwnerForm.get('phone')?.errors?.required">Phone number is required</div> -->
+                  <div *ngIf="ungulateOwnerForm.get('phone')?.errors?.required">Број телефона је обавезан
+                  </div>
+                </div>
+              </div>
+              <div class="form-group form-actions">
+                <button type="submit" class="btn btn-success save-button-medium" [disabled]="loading">
+                  <span *ngIf="!loading">Сачувај</span>
+                  <div *ngIf="loading" class="loader"></div>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
